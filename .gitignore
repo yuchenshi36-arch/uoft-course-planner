@@ -1,0 +1,16 @@
+node_modules/
+.tools/
+.tmp-home/
+.next/
+out/
+data/*.db
+data/*.db-journal
+data/
+*.db
+*.db-journal
+launch.log
+*.tsbuildinfo
+.DS_Store
+
+.vercel
+.env*
