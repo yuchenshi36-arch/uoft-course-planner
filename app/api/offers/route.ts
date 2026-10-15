@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { dbRun } from "@/lib/db";
+import { SHOW_HS_MODE } from "@/lib/features";
 import { getLocale } from "@/lib/i18n/server";
 import { t } from "@/lib/i18n/ui";
 
@@ -8,6 +9,10 @@ const STATUSES = new Set(["admitted", "waitlisted", "rejected"]);
 const CURRICULA = new Set(["OSSD", "IB", "A-Level", "AP", "其他"]);
 
 export async function POST(req: Request) {
+  // 高中生申请功能关闭时，不再接受新的录取案例提交
+  if (!SHOW_HS_MODE) {
+    return NextResponse.json({ ok: false }, { status: 404 });
+  }
   const locale = await getLocale();
   let body: Record<string, unknown>;
   try {

@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { isAdmin } from "@/lib/admin-auth";
 import { dbRun } from "@/lib/db";
 
 export async function POST(
@@ -8,6 +9,10 @@ export async function POST(
   const { id } = await params;
   const n = Number(id);
   if (!Number.isInteger(n)) {
+    return NextResponse.redirect(new URL("/admin", req.url));
+  }
+  // 只有登录过的管理员才能审核/删除录取案例
+  if (!(await isAdmin())) {
     return NextResponse.redirect(new URL("/admin", req.url));
   }
   let action = "";

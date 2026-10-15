@@ -233,6 +233,14 @@ const zh = {
   "offers.shareCta": "你也被录取了？匿名分享你的结果 →",
 
   // ---- 管理页 ----
+  "admin.login.title": "管理员登录",
+  "admin.login.hint": "输入管理密码才能查看统计、反馈和录取案例。",
+  "admin.login.placeholder": "管理密码",
+  "admin.login.button": "登录",
+  "admin.login.error": "密码不对，再试一次。",
+  "admin.login.notSet":
+    "还没有设置管理密码。请在项目根目录的 .env.local 里加一行 ADMIN_PASSWORD=你想要的密码，然后重启网站。",
+  "admin.logout": "退出登录",
   "admin.title": "网站管理 · 统计与反馈",
   "admin.backHome": "← 返回首页",
   "admin.stat.total": "累计访问",
@@ -532,6 +540,15 @@ const en: Record<UiKey, string> = {
 
   "offers.shareCta": "Also admitted? Share your result anonymously →",
 
+  "admin.login.title": "Admin sign-in",
+  "admin.login.hint":
+    "Enter the admin password to view stats, feedback and admission cases.",
+  "admin.login.placeholder": "Admin password",
+  "admin.login.button": "Sign in",
+  "admin.login.error": "Wrong password, please try again.",
+  "admin.login.notSet":
+    "No admin password set yet. Add ADMIN_PASSWORD=your-password to .env.local in the project root, then restart the site.",
+  "admin.logout": "Sign out",
   "admin.title": "Site admin · stats & feedback",
   "admin.backHome": "← Back to home",
   "admin.stat.total": "Total views",

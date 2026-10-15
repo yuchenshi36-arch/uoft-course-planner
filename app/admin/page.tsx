@@ -1,5 +1,7 @@
 import Link from "next/link";
+import AdminLogin from "@/components/AdminLogin";
 import { dbAll, dbGet } from "@/lib/db";
+import { adminConfigured, isAdmin } from "@/lib/admin-auth";
 import { getLocale } from "@/lib/i18n/server";
 import { translator } from "@/lib/i18n/ui";
 
@@ -42,9 +44,25 @@ interface OfferRow {
   created_at: string;
 }
 
-export default async function AdminPage() {
+export default async function AdminPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ error?: string }>;
+}) {
   const locale = await getLocale();
   const t = translator(locale);
+  const params = await searchParams;
+
+  if (!(await isAdmin())) {
+    return (
+      <AdminLogin
+        locale={locale}
+        configured={adminConfigured()}
+        error={params.error === "1"}
+      />
+    );
+  }
+
   const total = Number((await dbGet("SELECT COUNT(*) n FROM page_views"))?.n ?? 0);
   const today = Number(
     (await dbGet(
@@ -69,7 +87,14 @@ export default async function AdminPage() {
       <Link href="/" className="text-sm font-medium text-uoft hover:underline">
         {t("admin.backHome")}
       </Link>
-      <h1 className="mt-4 text-3xl font-bold text-uoft">{t("admin.title")}</h1>
+      <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
+        <h1 className="text-3xl font-bold text-uoft">{t("admin.title")}</h1>
+        <form method="POST" action="/api/admin/logout">
+          <button className="rounded-full border border-slate-300 px-3 py-1 text-sm font-medium text-slate-600 transition hover:bg-slate-50">
+            {t("admin.logout")}
+          </button>
+        </form>
+      </div>
 
       <section className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">

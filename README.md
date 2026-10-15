@@ -61,9 +61,11 @@ npm run dev        # 启动开发服务器，打开 http://localhost:3000
 ```bash
 TURSO_DATABASE_URL=libsql://<your-database>.turso.io
 TURSO_AUTH_TOKEN=<your-token>
+ADMIN_PASSWORD=<访问 /admin 管理后台需要的密码>
 ```
 
-把上面两行写在 `.env.local`（该文件已在 `.gitignore` 中，不会被提交）。
+把上面几行写在 `.env.local`（该文件已在 `.gitignore` 中，不会被提交）。
+没有设置 `ADMIN_PASSWORD` 时，`/admin` 页面会直接拒绝访问。
 
 也可以先构建再运行：
 
@@ -100,3 +102,10 @@ scripts/      数据脚本（seed 种子数据）
 data/         生成的 SQLite 数据库
 docs/         维护文档（专业覆盖对照流程等）
 ```
+
+## 许可证
+
+MIT License，版权归 YuChen (Alice) Shi。允许他人自由使用、修改和分发，只需保留版权声明；
+详细条款见 [LICENSE](LICENSE)。
+
+本项目与 University of Toronto 无隶属关系，课程要求请以官方学术日历为准。
